@@ -10,7 +10,7 @@
 % registration and arrival details
 regPreiod = 10;
 pplPerReg = 10;
-pctRegFull = 0.7;
+pctRegFull = 0.6;
 simLength = 300;    %length of a day, in minutes, 300min is 5hr. 
 
 % capacity of queue/servers
@@ -145,15 +145,23 @@ function r = generateAppDiff()
 end
 
 function r = generatePaperTime()
-    r = randi([1 2]);
+% r = exponential distribution with expected value of 3
+    % inversion method is used
+    randNum = rand();
+    % rate = 1/15 patient/min
+    r = -log(randNum)/(1/3);
+    % round to nearest minute
+    r = round(r);
 end
 
 function r = generateRegTime()
-     % inversion method is used
+    % r = 2 for P = 4/5; r = 10 for P = 1/5
     randNum = rand();
-    % rate = 1/15 patient/min
-    r = -log(randNum)/(1/4);
-    r = round(r);
+    if randNum <=0.1
+        r = 5;
+    else
+        r = 2;
+    end
 end 
 
 function r = generateVaccTime()
@@ -161,7 +169,7 @@ function r = generateVaccTime()
     % inversion method is used
     randNum = rand();
     % rate = 1/15 patient/min
-    r = -log(randNum)/(1/3);
+    r = -log(randNum)/(1/1);
     r = round(r);
 end
 
