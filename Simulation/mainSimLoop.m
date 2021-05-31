@@ -7,7 +7,7 @@
 % 05/30/3031
 
 numRuns = 1000;
-pctFull = 1;
+pctFull = 0.7;
 result = zeros(6,6);
 
 for regNum = 1:6
